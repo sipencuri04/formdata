@@ -2,6 +2,7 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Form Pendataan Keluarga</title>
   <style>
     body {
@@ -12,27 +13,33 @@
       padding: 30px;
       line-height: 1.6;
     }
+
     h1, h2 {
       color: #333;
     }
+
     form {
       background-color: #fff;
       padding: 20px;
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
+
     label {
       display: block;
       margin-top: 12px;
       font-weight: bold;
     }
+
     input, select, textarea {
       width: 100%;
       padding: 8px;
       margin-top: 4px;
       border: 1px solid #ccc;
       border-radius: 5px;
+      box-sizing: border-box;
     }
+
     button {
       background-color: #007BFF;
       color: white;
@@ -42,9 +49,11 @@
       cursor: pointer;
       margin-top: 20px;
     }
+
     button:hover {
       background-color: #0056b3;
     }
+
     .output {
       background-color: #f1f1f1;
       padding: 15px;
@@ -52,9 +61,45 @@
       white-space: pre-wrap;
       border-radius: 5px;
       border-left: 4px solid #007BFF;
-    
+    }
 
-      
+    .pekerjaan-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .kecil {
+      width: 100%;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 15px;
+      }
+
+      form {
+        padding: 15px;
+      }
+
+      label {
+        font-size: 14px;
+      }
+
+      input, select, textarea {
+        font-size: 14px;
+        padding: 6px;
+      }
+
+      button {
+        width: 100%;
+        font-size: 16px;
+      }
+
+      .pekerjaan-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -63,7 +108,6 @@
 <h1>Form Pendataan Keluarga</h1>
 
 <form id="pendataanForm">
-
   <label>Tanggal Pendataan:
     <input type="date" name="tanggal" required>
   </label>
@@ -100,25 +144,22 @@
   <label>Jumlah BPJS Pemerintah: <input type="number" name="pemerintah"></label>
 
   <h2>4. Kepemilikan Jamban</h2>
-
-<label>Memiliki Jamban?
-  <select name="punya_jamban" required>
-    <option value="">-- Pilih Jawaban --</option>
-    <option value="Ya">Ya</option>
-    <option value="Tidak">Tidak</option>
-  </select>
-</label>
-
-<label>Jenis Jamban:
-  <select name="jenis_jamban">
-    <option value="">-- Pilih Jenis Jamban --</option>
-    <option value="Leher Angsa">Leher Angsa</option>
-    <option value="Cemplung">Cemplung</option>
-    <option value="Plengsengan">Plengsengan</option>
-    <option value="Tidak Ada">Tidak Ada</option>
-  </select>
-</label>
-
+  <label>Memiliki Jamban?
+    <select name="punya_jamban" required>
+      <option value="">-- Pilih Jawaban --</option>
+      <option value="Ya">Ya</option>
+      <option value="Tidak">Tidak</option>
+    </select>
+  </label>
+  <label>Jenis Jamban:
+    <select name="jenis_jamban">
+      <option value="">-- Pilih Jenis Jamban --</option>
+      <option value="Leher Angsa">Leher Angsa</option>
+      <option value="Cemplung">Cemplung</option>
+      <option value="Plengsengan">Plengsengan</option>
+      <option value="Tidak Ada">Tidak Ada</option>
+    </select>
+  </label>
 
   <h2>5. Sumber Air</h2>
   <label>Memiliki sumber air?
@@ -129,85 +170,80 @@
   </label>
   <label>Jenis Sumber Air (pisahkan dengan koma): <input type="text" name="jenis_air"></label>
 
-<h2>6. Pekerjaan</h2>
-<label>Jumlah orang bekerja:
-  <input type="number" name="pekerja" style="width: 80px;">
-</label>
+  <h2>6. Pekerjaan</h2>
+  <label>Jumlah orang bekerja:
+    <input type="number" name="pekerja" style="width: 80px;">
+  </label>
 
-<div class="pekerjaan-grid">
-  <label>TNI<br><input type="number" name="tni" class="kecil"></label>
-  <label>Guru<br><input type="number" name="guru" class="kecil"></label>
-  <label>Polisi<br><input type="number" name="polisi" class="kecil"></label>
-  <label>PNS<br><input type="number" name="pns" class="kecil"></label>
-  <label>Petani<br><input type="number" name="petani" class="kecil"></label>
-  <label>Buruh Tani<br><input type="number" name="buruh_tani" class="kecil"></label>
-  <label>Karyawan Pabrik<br><input type="number" name="karyawan_pabrik" class="kecil"></label>
-  <label>Karyawan Toko<br><input type="number" name="karyawan_toko" class="kecil"></label>
-  <label>Lainnya<br><input type="number" name="lainnya" class="kecil"></label>
-</div>
-
-
-
+  <div class="pekerjaan-grid">
+    <label>TNI<br><input type="number" name="tni" class="kecil"></label>
+    <label>Guru<br><input type="number" name="guru" class="kecil"></label>
+    <label>Polisi<br><input type="number" name="polisi" class="kecil"></label>
+    <label>PNS<br><input type="number" name="pns" class="kecil"></label>
+    <label>Petani<br><input type="number" name="petani" class="kecil"></label>
+    <label>Buruh Tani<br><input type="number" name="buruh_tani" class="kecil"></label>
+    <label>Karyawan Pabrik<br><input type="number" name="karyawan_pabrik" class="kecil"></label>
+    <label>Karyawan Toko<br><input type="number" name="karyawan_toko" class="kecil"></label>
+    <label>Lainnya<br><input type="number" name="lainnya" class="kecil"></label>
+  </div>
 
   <h2>7. Listrik</h2>
-
-<label>Memiliki listrik PLN?
-  <select name="punya_pln" required>
-    <option value="">-- Pilih Jawaban --</option>
-    <option value="Ya">Ya</option>
-    <option value="Tidak">Tidak</option>
-  </select>
-</label>
-
-<label>Daya Listrik:
-  <select name="daya_listrik">
-    <option value="">-- Pilih Daya Listrik --</option>
-    <option value="300 W">300 W</option>
-    <option value="450 W">450 W</option>
-    <option value="900 W">900 W</option>
-    <option value="1300 W">1300 W</option>
-    <option value="2200 W">2200 W</option>
-    <option value="3500 W">3500 W</option>
-    <option value="4400 W">4400 W</option>
-    <option value="5500 W">5500 W</option>
-    <option value="6600 W ke atas">6600 W ke atas</option>
-    <option value="Tidak diketahui">Tidak diketahui</option>
-  </select>
-</label>
+  <label>Memiliki listrik PLN?
+    <select name="punya_pln" required>
+      <option value="">-- Pilih Jawaban --</option>
+      <option value="Ya">Ya</option>
+      <option value="Tidak">Tidak</option>
+    </select>
+  </label>
+  <label>Daya Listrik:
+    <select name="daya_listrik">
+      <option value="">-- Pilih Daya Listrik --</option>
+      <option value="300 W">300 W</option>
+      <option value="450 W">450 W</option>
+      <option value="900 W">900 W</option>
+      <option value="1300 W">1300 W</option>
+      <option value="2200 W">2200 W</option>
+      <option value="3500 W">3500 W</option>
+      <option value="4400 W">4400 W</option>
+      <option value="5500 W">5500 W</option>
+      <option value="6600 W ke atas">6600 W ke atas</option>
+      <option value="Tidak diketahui">Tidak diketahui</option>
+    </select>
+  </label>
 
   <h2>8. Status Rumah</h2>
   <label>Status Rumah:
-  <select name="status_rumah" required>
-    <option value="">-- Pilih Status --</option>
-    <option value="Permanen">Permanen</option>
-    <option value="Tidak Permanen">Tidak Permanen</option>
-  </select>
-</label>
+    <select name="status_rumah" required>
+      <option value="">-- Pilih Status --</option>
+      <option value="Permanen">Permanen</option>
+      <option value="Tidak Permanen">Tidak Permanen</option>
+    </select>
+  </label>
+  <label>Jenis Lantai:
+    <select name="lantai" required>
+      <option value="">-- Pilih Jenis Lantai --</option>
+      <option value="Keramik">Keramik</option>
+      <option value="Plester">Plester</option>
+      <option value="Tanah">Tanah</option>
+    </select>
+  </label>
+  <label>Jenis Dinding:
+    <select name="dinding" required>
+      <option value="">-- Pilih Jenis Dinding --</option>
+      <option value="Tembok">Tembok</option>
+      <option value="Kayu">Kayu</option>
+      <option value="Bambu">Bambu</option>
+    </select>
+  </label>
 
-<label>Jenis Lantai:
-  <select name="lantai" required>
-    <option value="">-- Pilih Jenis Lantai --</option>
-    <option value="Keramik">Keramik</option>
-    <option value="Plester">Plester</option>
-    <option value="Tanah">Tanah</option>
-  </select>
-</label>
-
-<label>Jenis Dinding:
-  <select name="dinding" required>
-    <option value="">-- Pilih Jenis Dinding --</option>
-    <option value="Tembok">Tembok</option>
-    <option value="Kayu">Kayu</option>
-    <option value="Bambu">Bambu</option>
-  </select>
-</label>  <button type="submit">Simpan & Lihat Data</button>
+  <button type="submit">Simpan & Lihat Data</button>
 </form>
 
 <div class="output" id="output"></div>
+
 <script>
   document.getElementById("pendataanForm").addEventListener("submit", function(e) {
     e.preventDefault();
-
     const form = e.target;
     const formData = new FormData(form);
 
@@ -219,7 +255,6 @@
     .then(res => {
       alert("✅ Data berhasil dikirim ke Spreadsheet!");
 
-      // Menampilkan data ke halaman sebagai tabel
       const kelompok = {
         "1. Identitas Keluarga": ['tanggal', 'dusun', 'rt', 'rw', 'kk', 'laki', 'perempuan'],
         "2. Data BPJS": ['tanggal', 'dusun', 'rt', 'rw', 'punya_bpjs', 'jumlah_bpjs', 'mandiri', 'pemerintah'],
@@ -234,8 +269,7 @@
         let html = `<h3>${judul}</h3><div style="overflow-x:auto;"><table style="border-collapse: collapse; width: 100%; margin-bottom: 24px;">`;
         html += '<tr style="background: #007BFF; color: #fff;">';
         fields.forEach(f => {
-          const label = f.replace(/_/g, ' ').toUpperCase();
-          html += `<th style="padding: 8px; border: 1px solid #ccc;">${label}</th>`;
+          html += `<th style="padding: 8px; border: 1px solid #ccc;">${f.replace(/_/g, ' ').toUpperCase()}</th>`;
         });
         html += '</tr><tr>';
         fields.forEach(f => {
@@ -250,7 +284,6 @@
         output += buatTabel(bagian, kelompok[bagian]);
       }
       document.getElementById("output").innerHTML = output;
-
       form.reset();
     })
     .catch(err => {
@@ -259,9 +292,6 @@
     });
   });
 </script>
-
-
-
 
 </body>
 </html>
