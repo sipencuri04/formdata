@@ -208,25 +208,18 @@
   document.getElementById("pendataanForm").addEventListener("submit", function(e) {
     e.preventDefault();
 
-    const formData = new FormData(e.target);
-    const data = {};
-    formData.forEach((value, key) => {
-      data[key] = value;
-    });
+    const form = e.target;
+    const formData = new FormData(form);
 
-    // 1. Kirim ke Google Spreadsheet via Apps Script Web App
     fetch("https://script.google.com/macros/s/AKfycbz3kgdbtXj3YpezOiCEG62ew5ZSJVDRCvl8LaM9T8ngLoQKVLGQHF-qNiF6n5VhAFmcYg/exec", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
+      body: formData
     })
     .then(res => res.text())
     .then(res => {
       alert("✅ Data berhasil dikirim ke Spreadsheet!");
 
-      // 2. Tampilkan output tabel per bagian form
+      // Menampilkan data ke halaman sebagai tabel
       const kelompok = {
         "1. Identitas Keluarga": ['tanggal', 'dusun', 'rt', 'rw', 'kk', 'laki', 'perempuan'],
         "2. Data BPJS": ['tanggal', 'dusun', 'rt', 'rw', 'punya_bpjs', 'jumlah_bpjs', 'mandiri', 'pemerintah'],
@@ -246,7 +239,7 @@
         });
         html += '</tr><tr>';
         fields.forEach(f => {
-          html += `<td style="padding: 8px; border: 1px solid #ccc;">${data[f] || ''}</td>`;
+          html += `<td style="padding: 8px; border: 1px solid #ccc;">${formData.get(f) || ''}</td>`;
         });
         html += '</tr></table></div>';
         return html;
@@ -258,8 +251,7 @@
       }
       document.getElementById("output").innerHTML = output;
 
-      // Reset form setelah tampil
-      document.getElementById("pendataanForm").reset();
+      form.reset();
     })
     .catch(err => {
       alert("❌ Gagal kirim data: " + err);
@@ -267,7 +259,6 @@
     });
   });
 </script>
-script>
 
 
 
